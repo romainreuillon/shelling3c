@@ -1,7 +1,3 @@
-package generations
-
-import java.io.{Writer, PrintWriter}
-
 /*
  * Copyright (C) 2015 Romain Reuillon
  *
@@ -20,29 +16,30 @@ import java.io.{Writer, PrintWriter}
  */
 
 
-object Run extends App {
+package generations
 
-  val model =
-    Schelling3C(
-      _.setSeed(42),
-      _.setNumAgents(360),
-      _.setNumBlueAgents(0),
-      _.setWorldXSize(20),
-      _.setWorldYSize(20),
-      _.setFractionRed(0.5),
-      _.setMoveMethod(Model.randomMoveMethod),
-      _.setThresholdRed(0.7),
-      _.setThresholdGreen(0.7),
-      _.setRandomMoveProbability(0.0),
-      _.setChanceDeath(0.01),
-      _.setChanceBirth(0.01),
-      _.setChanceMix(1.0)
-    )
-  
-  println(model.getAverageNumNborsGreen)
 
-  model.step()
+object Schelling3C {
 
-  println(model.getAverageNumNborsGreen)
+  def apply(setup: (Model => Any)*) = {
+
+    def init(model: Model) = {
+      val control = new PlainController
+      model.setController(control)
+      model.setCommandLineArgs(Array.empty[String])
+      control.setExitOnExit(false)
+      control.setModel(model)
+      model.setController(control)
+    }
+
+    val model = new BatchModel with NoReport
+    init(model)
+
+    model.schedule = null
+    setup.foreach(_(model))
+    model.buildSchedule()
+    model.begin()
+    model
+  }
 
 }
