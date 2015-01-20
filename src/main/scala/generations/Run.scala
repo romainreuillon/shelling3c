@@ -1,5 +1,7 @@
 package generations
 
+import java.io.{Writer, PrintWriter}
+
 /*
  * Copyright (C) 2015 Romain Reuillon
  *
@@ -20,15 +22,17 @@ package generations
 
 object Run extends App {
 
-  val model = new BatchModel()
+  def init(model: Model) = {
+    val control = new PlainController
+    model.setController(control)
+    model.setCommandLineArgs(Array.empty[String])
+    control.setExitOnExit(false)
+    control.setModel(model)
+    model.setController(control)
+  }
 
-  val control = new PlainController
-	model.setController(control)
-  model.setCommandLineArgs(Array.empty[String])
-
-	control.setExitOnExit(false)
-	control.setModel(model)
-  model.setController(control)
+  val model = new BatchModel with NoReport
+  init(model)
 
   model.setSeed(42)
   model.setNumAgents(360)
