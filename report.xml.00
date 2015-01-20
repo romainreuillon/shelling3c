@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reportfile>
+<parameters>
+	<rDebug>0</rDebug>
+	<seed>1421759204158</seed>
+	<stopT>2000</stopT>
+	<worldXSize>20</worldXSize>
+	<worldYSize>20</worldYSize>
+	<chanceBirth>0.01</chanceBirth>
+	<chanceDeath>0.01</chanceDeath>
+	<chanceMix>1.0</chanceMix>
+	<fractionGreen>0.5</fractionGreen>
+	<fractionRed>0.5</fractionRed>
+	<initialAgentsFileName></initialAgentsFileName>
+	<initialParametersFileName></initialParametersFileName>
+	<moveMethod>0</moveMethod>
+	<numAgents>360</numAgents>
+	<numBlueAgents>0</numBlueAgents>
+	<outputDirName>./</outputDirName>
+	<reportFrequency>1</reportFrequency>
+	<reportFileName>report</reportFileName>
+	<randomMoveProbability>0.0</randomMoveProbability>
+	<runNumber>0</runNumber>
+	<saveRunEndState>0</saveRunEndState>
+	<thresholdBlue>0.0</thresholdBlue>
+	<thresholdGreen>0.7</thresholdGreen>
+	<thresholdRed>0.7</thresholdRed>
+</parameters>
+<comment>
+            Red            Green      Blue
+        Avg     Avg     Avg    Avg
+  time  #Nbs   FrSame   #Nbs  FrSame    #
+</comment>
+<stepreport>    0  6,652   0,484  6,670   0,486      0</stepreport>
+<stepreport>    1  6,761   0,562  6,585   0,542      2</stepreport>
+<stepreport>    2  6,732   0,628  6,523   0,609      3</stepreport>
+<stepreport>    3  6,894   0,666  6,540   0,658      5</stepreport>
+<stepreport>    4  6,787   0,684  6,506   0,662      6</stepreport>
+<stepreport>    5  6,725   0,713  6,365   0,706      7</stepreport>
+<stepreport>    6  6,562   0,738  6,440   0,722      7</stepreport>
+<stepreport>    7  6,640   0,791  6,452   0,797      7</stepreport>
+<stepreport>    8  6,536   0,765  6,386   0,762      7</stepreport>
+<stepreport>    9  6,674   0,787  6,416   0,784      8</stepreport>
+<stepreport>   10  6,706   0,825  6,384   0,822      8</stepreport>
+<stepreport>   11  6,566   0,821  6,335   0,828      9</stepreport>
+<stepreport>   12  6,823   0,834  6,482   0,829      9</stepreport>
+<stepreport>   13  6,594   0,842  6,411   0,828      9</stepreport>
+<stepreport>   14  6,651   0,857  6,368   0,855      9</stepreport>
+<stepreport>   15  6,674   0,882  6,389   0,865      9</stepreport>
+<stepreport>   16  6,667   0,887  6,383   0,881     10</stepreport>
+<stepreport>   17  6,609   0,908  6,410   0,893     11</stepreport>
+<stepreport>   18  6,592   0,915  6,522   0,901     11</stepreport>
+<stepreport>   19  6,697   0,924  6,429   0,902     11</stepreport>
+<stepreport>   20  6,583   0,905  6,497   0,894     11</stepreport>
+<stepreport>   21  6,577   0,917  6,652   0,909     11</stepreport>
+<stepreport>   22  6,669   0,920  6,615   0,925     11</stepreport>
+<stepreport>   23  6,674   0,917  6,602   0,922     11</stepreport>
+<stepreport>   24  6,503   0,935  6,540   0,928     11</stepreport>
+<stepreport>   25  6,749   0,910  6,556   0,902     11</stepreport>
+<stepreport>   26  6,674   0,920  6,404   0,912     11</stepreport>
+<stepreport>   27  6,747   0,920  6,481   0,908     11</stepreport>
+<stepreport>   28  6,779   0,924  6,377   0,927     11</stepreport>
+<stepreport>   29  6,738   0,925  6,429   0,905     11</stepreport>
+<stepreport>   30  6,655   0,931  6,472   0,923     11</stepreport>
+<stepreport>   31  6,830   0,932  6,503   0,927     11</stepreport>
+<stepreport>   32  6,753   0,952  6,422   0,954     11</stepreport>
+<stepreport>   33  6,794   0,943  6,354   0,937     11</stepreport>
+<stepreport>   34  6,759   0,952  6,356   0,952     11</stepreport>
+<stepreport>   35  6,788   0,949  6,344   0,950     12</stepreport>
+<stepreport>   36  6,835   0,965  6,288   0,961     12</stepreport>
+<stepreport>   37  6,759   0,969  6,325   0,953     12</stepreport>
+<stepreport>   38  6,688   0,967  6,431   0,966     12</stepreport>
+<stepreport>   39  6,718   0,968  6,425   0,963     12</stepreport>
+<stepreport>   40  6,690   0,969  6,413   0,965     12</stepreport>
+<stepreport>   41  6,678   0,965  6,396   0,961     12</stepreport>
+<stepreport>   42  6,719   0,968  6,384   0,970     12</stepreport>
+<stepreport>   43  6,743   0,970  6,403   0,970     12</stepreport>
+<stepreport>   44  6,696   0,969  6,428   0,965     12</stepreport>
+<stepreport>   45  6,737   0,974  6,478   0,964     12</stepreport>
+<stepreport>   46  6,762   0,972  6,409   0,966     12</stepreport>
+<stepreport>   47  6,797   0,984  6,403   0,972     12</stepreport>
+<stepreport>   48  6,767   0,978  6,352   0,975     12</stepreport>
+<stepreport>   49  6,826   0,977  6,371   0,972     12</stepreport>
+<stepreport>   50  6,756   0,977  6,377   0,977     12</stepreport>
+<stepreport>   51  6,779   0,983  6,340   0,977     12</stepreport>
+<stepreport>   52  6,831   0,985  6,384   0,979     12</stepreport>
+<stepreport>   53  6,808   0,983  6,358   0,977     12</stepreport>
+<stepreport>   54  6,791   0,985  6,377   0,978     12</stepreport>
+<stepreport>   55  6,808   0,981  6,346   0,971     12</stepreport>
+<stepreport>   56  6,785   0,985  6,377   0,985     12</stepreport>
+<stepreport>   57  6,802   0,980  6,409   0,976     12</stepreport>
+<stepreport>   58  6,785   0,978  6,384   0,978     12</stepreport>
+<stepreport>   59  6,773   0,976  6,365   0,978     12</stepreport>
+<stepreport>   60  6,797   0,979  6,377   0,971     12</stepreport>
+<stepreport>   61  6,773   0,975  6,396   0,975     12</stepreport>
+<stepreport>   62  6,791   0,975  6,358   0,970     12</stepreport>
+<stepreport>   63  6,792   0,978  6,358   0,977     12</stepreport>
+<stepreport>   64  6,769   0,979  6,447   0,980     12</stepreport>
+<stepreport>   65  6,763   0,976  6,434   0,984     12</stepreport>
+<stepreport>   66  6,775   0,980  6,421   0,985     12</stepreport>
+<stepreport>   67  6,780   0,980  6,447   0,982     12</stepreport>
+<stepreport>   68  6,792   0,985  6,396   0,990     12</stepreport>
+<stepreport>   69  6,809   0,985  6,428   0,985     12</stepreport>
+<stepreport>   70  6,780   0,985  6,390   0,991     12</stepreport>
+<stepreport>   71  6,803   0,988  6,409   0,987     12</stepreport>
+<stepreport>   72  6,809   0,990  6,403   0,989     12</stepreport>
+<stepreport>   73  6,792   0,988  6,365   0,980     12</stepreport>
+<stepreport>   74  6,786   0,984  6,434   0,985     12</stepreport>
+<stepreport>   75  6,786   0,988  6,421   0,987     12</stepreport>
+<stepreport>   76  6,798   0,989  6,390   0,986     12</stepreport>
+<stepreport>   77  6,798   0,985  6,434   0,984     12</stepreport>
+<stepreport>   78  6,792   0,990  6,434   0,988     12</stepreport>
+<stepreport>   79  6,780   0,990  6,434   0,988     12</stepreport>
+<stepreport>   80  6,786   0,991  6,415   0,991     12</stepreport>
+<stepreport>   81  6,769   0,987  6,434   0,988     12</stepreport>
+<stepreport>   82  6,792   0,987  6,434   0,986     12</stepreport>
+<stepreport>   83  6,780   0,988  6,434   0,985     12</stepreport>
+<stepreport>   84  6,798   0,991  6,415   0,988     12</stepreport>
+<stepreport>   85  6,775   0,988  6,409   0,990     12</stepreport>
+<stepreport>   86  6,792   0,990  6,421   0,988     12</stepreport>
+<stepreport>   87  6,780   0,988  6,403   0,991     12</stepreport>
+<stepreport>   88  6,780   0,989  6,421   0,988     12</stepreport>
+<stepreport>   89  6,803   0,991  6,421   0,987     12</stepreport>
+<stepreport>   90  6,792   0,989  6,434   0,985     12</stepreport>
+<stepreport>   91  6,786   0,988  6,428   0,987     12</stepreport>
+<stepreport>   92  6,792   0,992  6,409   0,990     12</stepreport>
+<stepreport>   93  6,792   0,992  6,409   0,990     12</stepreport>
