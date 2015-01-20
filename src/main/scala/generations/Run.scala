@@ -30,7 +30,7 @@ object Run extends App {
 	control.setModel(model)
   model.setController(control)
 
-
+  model.setSeed(42)
   model.setNumAgents(360)
   model.setNumBlueAgents(0)
   model.setWorldXSize(20)
