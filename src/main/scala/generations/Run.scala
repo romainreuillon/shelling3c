@@ -1,4 +1,4 @@
-import generations.Model
+package generations
 
 /*
  * Copyright (C) 2015 Romain Reuillon
@@ -20,7 +20,17 @@ import generations.Model
 
 object Run extends App {
 
-  val model = new Model()
+  val model = new BatchModel()
+
+  val control = new PlainController
+	model.setController(control)
+  model.setCommandLineArgs(Array.empty[String])
+
+	control.setExitOnExit(false)
+	control.setModel(model)
+  model.setController(control)
+
+
   model.setNumAgents(360)
   model.setNumBlueAgents(0)
   model.setWorldXSize(20)
