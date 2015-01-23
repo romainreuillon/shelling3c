@@ -6,4 +6,5 @@ scalaVersion := "2.11.5"
 
 libraryDependencies += "fr.iscpif" %% "mgo" % "1.79-SNAPSHOT"
 
+Resolver.sonatypeRepo("snapshots")
 
