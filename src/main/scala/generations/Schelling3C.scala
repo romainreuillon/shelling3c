@@ -21,7 +21,7 @@ package generations
 
 object Schelling3C {
 
-  def apply(setup: (Model => Any)*) = {
+  def apply(setup: (Model => Any)*)(seed: Long) = {
 
     def init(model: Model) = {
       val control = new PlainController
@@ -37,6 +37,7 @@ object Schelling3C {
 
     model.schedule = null
     setup.foreach(_(model))
+    model.setSeed(seed)
     model.buildSchedule()
     model.begin()
     model

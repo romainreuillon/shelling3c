@@ -19,16 +19,18 @@ import java.io.{Writer, PrintWriter}
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import Indicator._
+
+
 
 object Run extends App {
 
-  val model =
+  val m =
     Schelling3C(
-      _.setSeed(42),
-      _.setNumAgents(360),
-      _.setNumBlueAgents(0),
-      _.setWorldXSize(20),
-      _.setWorldYSize(20),
+      _.setNumAgents(60),
+      _.setNumBlueAgents(10),
+      _.setWorldXSize(10),
+      _.setWorldYSize(10),
       _.setFractionRed(0.5),
       _.setMoveMethod(Model.randomMoveMethod),
       _.setThresholdRed(0.7),
@@ -37,12 +39,17 @@ object Run extends App {
       _.setChanceDeath(0.01),
       _.setChanceBirth(0.01),
       _.setChanceMix(1.0)
-    )
+    )(_)
+
+  val fitness = new Fitness {
+    override def model = m
+  }
+
   
-  println(model.getAverageNumNborsGreen)
 
-  model.step()
+  println(fitness.value(42))
 
-  println(model.getAverageNumNborsGreen)
+
+
 
 }

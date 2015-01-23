@@ -1042,4 +1042,7 @@ public class Model extends ModelParameters {
 		System.exit( 0 );
 	}
 
+    public Object2DGrid getWorld() {
+        return world;
+    }
 }
