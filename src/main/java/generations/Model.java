@@ -120,8 +120,8 @@ public class Model extends ModelParameters {
 	protected Object2DGrid world;
 
 	public static final int randomMoveMethod = 0;
-	public static final int nearestOpenMoveMethod = 0;
-	public static final int nearestOKMoveMethod = 0;
+	public static final int nearestOpenMoveMethod = 1;
+	public static final int nearestOKMoveMethod = 2;
 
 	protected int numMovedThisStep = 0;
 	public static final int redType = 0;
@@ -499,7 +499,7 @@ public class Model extends ModelParameters {
 		if ( rDebug > 1) 
 			System.out.printf( "===> Model-buildModel called..." );
 
-		buildModelStart();  // CALL FIRST -- defined in super class
+		//buildModelStart();  // CALL FIRST -- defined in super class
 
 		// create the world and then the agents themselves
 		world = new Object2DGrid ( worldYSize, worldYSize );
@@ -887,7 +887,9 @@ public class Model extends ModelParameters {
 	public void step () {
 						
 		numMovedThisStep = 0;
-		SimUtilities.shuffle( agentList, Random.uniform );
+
+        Collections.shuffle(agentList, random);
+
 		// tell each agent to take a step
 		for (int i = 0; i < agentList.size (); i++) {
 			Agent a = (Agent) agentList.get (i);

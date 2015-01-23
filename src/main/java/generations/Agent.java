@@ -151,7 +151,7 @@ public class Agent implements Drawable {
 		
 		updateNborhoodStats();			
 		
-		if ( randomMoveProb > Model.getUniformDoubleFromTo( 0.0, 1.0) ) {
+		if ( randomMoveProb > model.getUniformDoubleFromTo( 0.0, 1.0) ) {
 			moved = moveRandom();
 		}
 		else if ( fractionNborsSame <= threshold ) {
@@ -182,7 +182,7 @@ public class Agent implements Drawable {
 	
 	public void contemplateBirth (){
 		
-		double birthDice = Model.getUniformDoubleFromTo( 0.0, 1.0);
+		double birthDice = model.getUniformDoubleFromTo( 0.0, 1.0);
 		
 		if ( model.getRDebug() > 1 )
 			System.out.printf( " agent %d considers giving birth...\n", ID );
@@ -210,7 +210,7 @@ public class Agent implements Drawable {
 	
 	public void contemplateDeath (){
 		
-		double deathDice = Model.getUniformDoubleFromTo(0.0, 1.0);
+		double deathDice = model.getUniformDoubleFromTo(0.0, 1.0);
 		double deathChance = model.getChanceDeath();
 		
 		if ( model.getRDebug() > 1 )
@@ -245,14 +245,14 @@ public class Agent implements Drawable {
 
 		if ( type == Model.redType ) {	
 			
-			if ( ( model.getChanceMix() * fractionsNborsDifferent ) > Model.getUniformDoubleFromTo( 0.0, 1.0))
+			if ( ( model.getChanceMix() * fractionsNborsDifferent ) > model.getUniformDoubleFromTo( 0.0, 1.0))
 				model.addBlueNursery() ; 	
 				else 
 				model.addRedNursery() ; 
 				}
 		
 		else if ( type == Model.greenType ) {		
-			if ( ( model.getChanceMix() * fractionsNborsDifferent ) > Model.getUniformDoubleFromTo( 0.0, 1.0))
+			if ( ( model.getChanceMix() * fractionsNborsDifferent ) > model.getUniformDoubleFromTo( 0.0, 1.0))
 				model.addBlueNursery();
 			else 
 				model.addGreenNursery();
@@ -339,8 +339,8 @@ public class Agent implements Drawable {
 		int maxTries = 4096;															// HS	
 		
 		do {
-   			newx = Model.getUniformIntFromTo ( 0, xSize - 1 );
-	   		newy = Model.getUniformIntFromTo ( 0, ySize - 1 );
+   			newx = model.getUniformIntFromTo ( 0, xSize - 1 );
+	   		newy = model.getUniformIntFromTo ( 0, ySize - 1 );
 		} while (world.getObjectAt (newx, newy) != null && tries++ < maxTries );		
 		
 		if ( tries == maxTries ) {

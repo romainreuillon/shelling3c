@@ -2,6 +2,8 @@ package generations
 
 import java.io.{Writer, PrintWriter}
 
+import scala.util.Random
+
 /*
  * Copyright (C) 2015 Romain Reuillon
  *
@@ -45,11 +47,7 @@ object Run extends App {
     override def model = m
   }
 
-  
 
-  println(fitness.value(42))
-
-
-
+  println(fitness.value(new Random(42)))
 
 }

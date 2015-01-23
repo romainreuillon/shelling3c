@@ -21,6 +21,7 @@ package generations
 import uchicago.src.sim.space.Object2DGrid
 import collection.JavaConversions._
 import math._
+import scala.util.Random
 
 object Indicator {
 
@@ -88,14 +89,14 @@ object Indicator {
 
 
   trait Fitness {
-    def model: Long => Model
+    def model: Random => Model
     def maxUnsatisfied: Double = 0.8
     def minSwitch: Double = 5.0
-    def warming = 500
-    def range = 100
+    def warming = 100
+    def range = 50
 
-    def value(seed: Long) = {
-      val m = model(seed)
+    def value(rng: Random) = {
+      val m = model(rng)
       (0 until warming).foreach(_ => m.step)
       val (totalSwitch, totalUnsatisfied) =
         (0 until range).foldLeft((0.0, 0.0)) {
@@ -107,7 +108,8 @@ object Indicator {
       val (normalisedSwitch, normalisedUnsatisfied) = (totalSwitch.toDouble / range, totalUnsatisfied.toDouble / range)
       val diffSwitch = (minSwitch - normalisedSwitch) / minSwitch
       val diffUnsatisfied = (normalisedUnsatisfied - maxUnsatisfied) / maxUnsatisfied
-      (max(0.0, diffSwitch), max(0.0, diffUnsatisfied))
+      //(max(0.0, diffSwitch), max(0.0, diffUnsatisfied))
+      (abs(diffSwitch), abs(diffUnsatisfied))
     }
   }
 

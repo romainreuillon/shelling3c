@@ -44,7 +44,17 @@ import java.util.TreeMap;
 
 public class ModelParameters extends SimModelImpl {
 
-	// setup
+    protected java.util.Random random;
+
+    public java.util.Random getRandom() {
+        return random;
+    }
+
+    public void setRandom(java.util.Random random) {
+        this.random = random;
+    }
+
+    // setup
 	// this should be called *last* in the Model setup() that
 	// extends this class.
 	public void setup() {
@@ -69,7 +79,7 @@ public class ModelParameters extends SimModelImpl {
 
 	// buildModelStart
 	// this should be called first by the buildModel in the extending class.
-	public void buildModelStart() {
+	/*public void buildModelStart() {
 		if ( getSeed() == 1234567 || getSeed() == 0) {
 			long s = System.currentTimeMillis();
 			setSeed( s );
@@ -79,7 +89,7 @@ public class ModelParameters extends SimModelImpl {
 		if( rDebug > 1 )
 			System.out.printf( "\nabout to setSeed(%d)\n", getSeed() );
 		resetRNGenerators();
-	}
+	}*/
 
 
 	// buildSchedule
@@ -107,7 +117,7 @@ public class ModelParameters extends SimModelImpl {
 	protected int			stopT = 2000;
 	protected int			rDebug = 0;
 	protected int			saveRunEndState = 0;
-	protected long    		seed = 1234567;
+	//protected long    		seed = 1234567;
 	protected PrintWriter		reportFile, plaintextReportFile;
 	protected PrintWriter		changesFile;
 
@@ -266,7 +276,7 @@ public class ModelParameters extends SimModelImpl {
 			writeChangeToReportFile ( "rDebug", String.valueOf( i ) );
 	}
 
-	public long getSeed () { return seed; }
+	/*public long getSeed () { return seed; }
 	public void setSeed ( long i ) {
 		if( rDebug > 0 )
 			System.out.println( "setSeed ( " + i + " ) called" );
@@ -279,57 +289,56 @@ public class ModelParameters extends SimModelImpl {
 		}
 		if( modelType.equals( "GUIModel" ) && schedule != null)
 			writeChangeToReportFile ( "seed", String.valueOf( i ) );
-	}
+	}*/
 
-	public void resetRNGenerators ( ) {
+	/*public void resetRNGenerators ( ) {
 		if ( rDebug > 0 )
 			System.out.printf( "\nresetRNGenerators with %d\n", getSeed() );
 
-		// this is required because once you change the seed you invalidate
-		// any previously created distributions
-		uchicago.src.sim.util.Random.setSeed( seed );
-		uchicago.src.sim.util.Random.createUniform();
-		uchicago.src.sim.util.Random.createNormal( 0.0, 1.0 );
-	}
+		random.setSeed(seed);
+	}*/
 
 	// NOTE: these are class methods!
-	static public int getUniformIntFromTo ( int low, int high ) {
-		int randNum = Random.uniform.nextIntFromTo( low, high );
+	public int getUniformIntFromTo ( int low, int high ) {
+		int randNum = random.nextInt( high - low ) + low;
 		// System.out.println( "getUniformIntFromTo:  " + randNum );
 		return randNum;
 	}
 
-	static public double getNormalDouble ( double mean, double var ) {
-		double randNum =  Random.normal.nextDouble ( mean, var );
+	public double getNormalDouble ( double mean, double var ) {
+		//double randNum =  Random.normal.nextDouble ( mean, var );
+        double randNum = random.nextGaussian() * var + mean;
 		// System.out.println( "getNormalDouble:  " + randNum );
 		return randNum;
 	}
-	static public double getUniformDoubleFromTo( double low, double high ) {
-		double randNum = Random.uniform.nextDoubleFromTo( low, high );
+	public double getUniformDoubleFromTo( double low, double high ) {
+		//double randNum = Random.uniform.nextDoubleFromTo( low, high );
+        double randNum = random.nextDouble() * (high - low) + low;
+
 		// System.out.println( "getUniformDoubleFromTo:  " + randNum );
 		return randNum;
 	}
 
 	// loop until a number between 0 and 1 is generated,
 	// if mean and var are set correctly the loop will rarely happen
-	static public double getNormalDoubleProb ( double mean, double var ) {
+	public double getNormalDoubleProb ( double mean, double var ) {
 		if ( mean < 0 || mean > 1 ) {
 			System.out.println ( "Invalid value set for normal distribution mean" );
 			return -1;
 		}
-		double d = Random.normal.nextDouble ( mean, var );
+		double d = getNormalDouble(mean, var);
 		while ( d < 0 || d > 1 )
-			d = Random.normal.nextDouble ( mean, var );
+			d = getNormalDouble(mean, var);
 
 		// System.out.println( "getNormalDoubleProb:  " + d );
 
 		return d;
 	}
 
-	public void setRngSeed ( long i ) {
+	/*public void setRngSeed ( long i ) {
 		System.out.println( "setRngSeed ( " + i + " ) called" );
 		setSeed( i );
-	}
+	}*/
 
 	public PrintWriter getReportFile () { return reportFile; }
 	public PrintWriter getPlaintextReportFile () { return plaintextReportFile; }

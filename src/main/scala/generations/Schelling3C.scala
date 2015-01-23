@@ -18,10 +18,13 @@
 
 package generations
 
+import scala.util.Random
+import scala.util.Random._
+
 
 object Schelling3C {
 
-  def apply(setup: (Model => Any)*)(seed: Long) = {
+  def apply(setup: (Model => Any)*)(rng: Random) = {
 
     def init(model: Model) = {
       val control = new PlainController
@@ -37,7 +40,7 @@ object Schelling3C {
 
     model.schedule = null
     setup.foreach(_(model))
-    model.setSeed(seed)
+    model.setRandom(rng.self)
     model.buildSchedule()
     model.begin()
     model
