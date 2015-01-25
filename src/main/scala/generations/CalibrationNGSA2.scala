@@ -15,7 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package generations
 
 import fr.iscpif.mgo._
@@ -25,8 +24,9 @@ import org.apache.commons.math3.random.Well44497a
 
 import scala.util.Random
 import scalax.io.Resource
+import Statistic._
 
-object CalibrationNGSA2 extends  App {
+object CalibrationNGSA2 extends App {
 
   val replications = 50
 
@@ -40,23 +40,7 @@ object CalibrationNGSA2 extends  App {
     type P = Seq[Double]
 
     override def express(g: Seq[Double], rng: Random) = {
-      val m =
-        Schelling3C(
-          _.setWorldXSize(20),
-          _.setWorldYSize(20),
-          _.setNumAgents(360),
-          _.setNumBlueAgents(0),
-          _.setFractionRed(0.5),
-          _.setFractionGreen(0.5),
-          _.setMoveMethod(Model.randomMoveMethod),
-          _.setRandomMoveProbability(0.0),
-          _.setChanceDeath(0.01),
-          _.setChanceBirth(0.01),
-          _.setThresholdRed(g(0)),
-          _.setThresholdGreen(g(1)),
-          _.setThresholdBlue(g(2)),
-          _.setChanceMix(g(3))
-        )(_)
+      val m = Schelling3C(g(0), g(1), g(2), g(3))
 
       val f =
         new Fitness {
@@ -64,20 +48,19 @@ object CalibrationNGSA2 extends  App {
         }
 
       val (o1, o2) = (0 until replications).map(_ => f.value(rng)).unzip
-      Seq(o1.sum/o1.size, o2.sum/o2.size)
+      Seq(median(o1), median(o2))
     }
 
     override def evaluate(p: P, rng: Random) = p
 
   }
 
-
-
   val m =
     new SchellingPB with NSGAII with CounterTermination {
       def steps = 100
       def mu = 100
       def lambda = 100
+      override def cloneProbability: Double = 0.01
     }
 
   implicit val rng = newRNG(42)
@@ -94,9 +77,5 @@ object CalibrationNGSA2 extends  App {
           output.append(line.mkString(",") + "\n")
         }
     }
-
-
-
-
 
 }

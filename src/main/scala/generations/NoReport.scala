@@ -15,10 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package generations
 
-import java.io.{Writer, PrintWriter}
+import java.io.{ Writer, PrintWriter }
 
 trait NoReport <: Model {
 

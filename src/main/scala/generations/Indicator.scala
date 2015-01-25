@@ -15,7 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package generations
 
 import uchicago.src.sim.space.Object2DGrid
@@ -30,9 +29,8 @@ object Indicator {
       def sizeX = grid.getSizeX
       def sizeY = grid.getSizeY
       def matrix =
-        for {x <- 0 until sizeX}
-        yield for {y <- 0 until sizeY}
-        yield {
+        for { x <- 0 until sizeX }
+          yield for { y <- 0 until sizeY } yield {
           grid.getObjectAt(x, y) match {
             case null => -1
             case x => x.asInstanceOf[Agent].getType
@@ -46,14 +44,13 @@ object Indicator {
   implicit class PositiveModulo(i: Int) {
     def positiveModulo(size: Int) = {
       val mod = i % size
-      if(mod < 0) mod + size else mod
+      if (mod < 0) mod + size else mod
     }
   }
 
   class Torus[T](val array: Array[Array[T]], val sizeX: Int, val sizeY: Int) {
     def apply(x: Int, y: Int) = array(x.positiveModulo(sizeX))(y.positiveModulo(sizeY))
   }
-
 
   def averageSwitchRate(world: Torus[Int]) = {
     val switchRates =
@@ -81,12 +78,11 @@ object Indicator {
       }
 
     val (lastX, lastY) = offsets.last
-    nbSwitch(world(x + lastX,  y + lastY), offsets)
+    nbSwitch(world(x + lastX, y + lastY), offsets)
   }
 
   def unsatisfied(model: Model) =
     model.getAgentList.map(_.asInstanceOf[Agent]).count(a => a.getFractionNborsSame <= a.getThreshold) / model.getAgentList.size
-
 
   trait Fitness {
     def model: Random => Model
@@ -112,6 +108,5 @@ object Indicator {
       (abs(diffSwitch), abs(diffUnsatisfied))
     }
   }
-
 
 }

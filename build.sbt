@@ -8,3 +8,5 @@ libraryDependencies += "fr.iscpif" %% "mgo" % "1.79-SNAPSHOT"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
+scalariformSettings
+

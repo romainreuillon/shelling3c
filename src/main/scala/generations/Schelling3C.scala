@@ -15,12 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package generations
+
+import net.sourceforge.openforecast.models.DoubleExponentialSmoothingModel
 
 import scala.util.Random
 import scala.util.Random._
-
 
 object Schelling3C {
 
@@ -45,5 +45,27 @@ object Schelling3C {
     model.begin()
     model
   }
+
+  def apply(
+    thresholdRed: Double,
+    thresholdGreen: Double,
+    thresholdBlue: Double,
+    chanceMix: Double): Random => Model =
+    Schelling3C(
+      _.setWorldXSize(20),
+      _.setWorldYSize(20),
+      _.setNumAgents(360),
+      _.setNumBlueAgents(0),
+      _.setFractionRed(0.5),
+      _.setFractionGreen(0.5),
+      _.setMoveMethod(Model.randomMoveMethod),
+      _.setRandomMoveProbability(0.0),
+      _.setChanceDeath(0.01),
+      _.setChanceBirth(0.01),
+      _.setThresholdRed(thresholdRed),
+      _.setThresholdGreen(thresholdGreen),
+      _.setThresholdBlue(thresholdBlue),
+      _.setChanceMix(chanceMix)
+    )(_)
 
 }

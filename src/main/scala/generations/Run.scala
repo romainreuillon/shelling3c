@@ -1,6 +1,6 @@
 package generations
 
-import java.io.{Writer, PrintWriter}
+import java.io.{ Writer, PrintWriter }
 
 import scala.util.Random
 
@@ -23,8 +23,6 @@ import scala.util.Random
 
 import Indicator._
 
-
-
 object Run extends App {
 
   val m =
@@ -46,7 +44,6 @@ object Run extends App {
   val fitness = new Fitness {
     override def model = m
   }
-
 
   println(fitness.value(new Random(42)))
 
