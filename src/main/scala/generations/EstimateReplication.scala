@@ -39,9 +39,10 @@ object EstimateReplication extends App {
 
   val points = Seq(Point(0.5, 0.5, 0.5, 0.5), Point(0.1, 0.1, 0.1, 0.1), Point(0.9, 0.9, 0.9, 0.9))
 
-  def computeReplications(point: Point, seed: Long) =
+  def computeReplications(point: Point)(implicit rng: Random) =
     for {
       r <- (0 until replications)
+      seed = rng.nextLong()
     } yield Future {
       val Point(tr, tg, tb, cm) = point
       val rng = new RandomAdaptor(new Well44497a(seed))
@@ -54,13 +55,13 @@ object EstimateReplication extends App {
   for {
     (point, seed) <- points.zipWithIndex
   } {
-    val rng = new RandomAdaptor(new Well44497a(seed))
+    implicit val rng: Random = new RandomAdaptor(new Well44497a(seed))
     val outputFile = Resource.fromFile(s"/tmp/replications/${point.productIterator.mkString("_")}")
-    val (o1, o2) = computeReplications(point, rng.nextLong).map(Await.result(_, Duration.Inf)).unzip
+    val (o1, o2) = computeReplications(point).map(Await.result(_, Duration.Inf)).unzip
     for {
       size <- 1 to 100
-      v1 = bootstrapVariance(o1, size, 100)(rng)
-      v2 = bootstrapVariance(o2, size, 100)(rng)
+      v1 = bootstrapVariance(o1, size, 100)
+      v2 = bootstrapVariance(o2, size, 100)
     } outputFile.append(s"$size,$v1, $v2\n")
   }
 
