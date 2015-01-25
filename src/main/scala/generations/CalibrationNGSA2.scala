@@ -28,7 +28,7 @@ import Statistic._
 
 object CalibrationNGSA2 extends App {
 
-  val replications = 50
+  val replications = 250
 
   trait SchellingPB extends GAProblem with MGFitness {
 
