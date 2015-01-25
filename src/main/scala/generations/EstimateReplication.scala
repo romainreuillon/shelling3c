@@ -47,7 +47,7 @@ object EstimateReplication extends App {
       val Point(tr, tg, tb, cm) = point
       val rng = new RandomAdaptor(new Well44497a(seed))
       val fitness = new Fitness {
-        override def model: (Random) => Model = Schelling3C(tr, tg, tb, cm)
+        def model = Schelling3C(tr, tg, tb, cm)
       }
       fitness.value(rng)
     }
@@ -59,7 +59,7 @@ object EstimateReplication extends App {
     val outputFile = Resource.fromFile(s"/tmp/replications/${point.productIterator.mkString("_")}.csv")
     val (o1, o2) = computeReplications(point).map(Await.result(_, Duration.Inf)).unzip
     for {
-      size <- 1 to 100
+      size <- 1 to 500
       v1 = bootstrapVariance(o1, size, 100)
       v2 = bootstrapVariance(o2, size, 100)
     } outputFile.append(s"$size,$v1, $v2\n")
