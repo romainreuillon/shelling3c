@@ -56,7 +56,7 @@ object EstimateReplication extends App {
     (point, seed) <- points.zipWithIndex
   } {
     implicit val rng: Random = new RandomAdaptor(new Well44497a(seed))
-    val outputFile = Resource.fromFile(s"/tmp/replications/${point.productIterator.mkString("_")}")
+    val outputFile = Resource.fromFile(s"/tmp/replications/${point.productIterator.mkString("_")}.csv")
     val (o1, o2) = computeReplications(point).map(Await.result(_, Duration.Inf)).unzip
     for {
       size <- 1 to 100
