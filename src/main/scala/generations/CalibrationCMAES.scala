@@ -20,14 +20,14 @@ package generations
 import cmaes.CMAEvolutionStrategy
 import org.apache.commons.math3.random.{Well44497a, RandomAdaptor}
 import scala.util.Random
-import generations.Indicator.AggregatedFitness
+import generations.Indicator.Fitness
 import Statistic._
 
 object CalibrationCMAES extends App {
 
   val replications = 250
 
-  val sigma = 0.2
+  val sigma = 0.5
 
   val nbIterMax = 99999
 
@@ -88,8 +88,8 @@ object CalibrationCMAES extends App {
         println("thresholdBlue " + currentParam(2) )
         println("chanceMix " + currentParam(3) )
         println(" ")
-        println("medianSwitch " + results(1))
-        println("medianUnsatisfied " + results(2))
+        println("fitSwitch " + results(1))
+        println("fitUnsatisfied " + results(2))
         println(" ")
         println("bestFit " + bestFit)
         println(" ")
@@ -109,14 +109,10 @@ object CalibrationCMAES extends App {
     val m = Schelling3C(g(0), g(1), g(2), g(3))
 
 
-
     val f =
-      new AggregatedFitness {
+      new Fitness {
         def model = m
       }
-
-    var avgSwitch = 0.0
-    var avgUnsatisfied = 0.0
 
 
     var ArrayFitness =new Array[Double](replications)
@@ -124,22 +120,22 @@ object CalibrationCMAES extends App {
     var ArrayUnsatisfied =new Array[Double](replications)
 
     for (i <- 0 to replications-1) {
-      var results = f.value(rng)
+      var (o1,o2) = f.value(rng)
 
-      ArrayFitness(i) = results(0)
-      ArraySwitch(i) = results(1)
-      ArrayUnsatisfied(i) = results(2)
+      ArrayFitness(i) = o1 + o2
+      ArraySwitch(i) = o1
+      ArrayUnsatisfied(i) = o2
     }
 
     var medianFit = median(ArrayFitness.toSeq)
-    var medianSwitch = median(ArraySwitch.toSeq)
-    var medianUnsatisfied = median(ArrayUnsatisfied.toSeq)
+    var medianFitSwitch = median(ArraySwitch.toSeq)
+    var medianFitUnsatisfied = median(ArrayUnsatisfied.toSeq)
 
 
     var results = new Array[Double](3)
     results(0)  = medianFit
-    results(1)  = medianSwitch
-    results(2)  = medianUnsatisfied
+    results(1)  = medianFitSwitch
+    results(2)  = medianFitUnsatisfied
 
     return results
   }
