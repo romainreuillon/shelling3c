@@ -98,6 +98,7 @@ object Indicator {
         (0 until range).foldLeft((0.0, 0.0)) {
           case ((totalSwitch, totalUnsatisfied), _) =>
             val v = (averageSwitchRate(m.getWorld.toTorus), unsatisfied(m))
+
             m.step
             (totalSwitch + v._1, totalUnsatisfied + v._2)
         }
@@ -111,8 +112,11 @@ object Indicator {
 
 
 
-  trait ResultShelling {
+  trait AggregatedFitness {
     def model: Random => Model
+
+    def targetUnsatisfied: Double = 0.8
+    def targetSwitch: Double = 5.0
 
     def warming = 100
     def range = 50
@@ -124,47 +128,24 @@ object Indicator {
         (0 until range).foldLeft((0.0, 0.0)) {
           case ((totalSwitch, totalUnsatisfied), _) =>
             val v = (averageSwitchRate(m.getWorld.toTorus), unsatisfied(m))
+
             m.step
             (totalSwitch + v._1, totalUnsatisfied + v._2)
         }
       val (normalisedSwitch, normalisedUnsatisfied) = (totalSwitch.toDouble / range, totalUnsatisfied.toDouble / range)
 
 
-      var results = new Array[Double](2)
-      results(0) = normalisedSwitch
-      results(1) = normalisedUnsatisfied
+      var fit = Math.pow((targetSwitch - normalisedSwitch) / targetSwitch,2) + Math.pow((normalisedUnsatisfied - targetUnsatisfied) / targetUnsatisfied,2)
+
+      var results = new Array[Double](3)
+      results(0) = fit
+      results(1) = normalisedSwitch
+      results(2) = normalisedUnsatisfied
 
       return results
     }
   }
 
 
-
-//trait ResultShelling {
-//  def model: Random => Model
-//
-//  def warming = 100
-//  def range = 50
-//
-//  def value(rng: Random): Array[Double] = {
-//    val m = model(rng)
-//    (0 until warming).foreach(_ => m.step)
-//    val (totalSwitch, totalFractionBlue) =
-//      (0 until range).foldLeft((0.0, 0.0)) {
-//        case ((totalSwitch, totalFractionBlue), _) =>
-//          val v = (averageSwitchRate(m.getWorld.toTorus), m.getCountBlue/m.getCurrentNumAgents)
-//          m.step
-//
-//          (totalSwitch + v._1, totalFractionBlue + v._2)
-//      }
-//    val (normalisedSwitch, normalisedFractionBlue) = (totalSwitch.toDouble / range, totalFractionBlue.toDouble / range)
-//
-//
-//    var results = new Array[Double](2)
-//    results(0) = normalisedSwitch
-//    results(1) = normalisedFractionBlue
-//
-//    return results
-//  }
 
 }
