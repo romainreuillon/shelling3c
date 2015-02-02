@@ -23,7 +23,7 @@ import scala.concurrent.duration.Duration
 import scala.concurrent.{ Await, Future }
 import scala.util.Random
 import scalax.io.Resource
-import util.Random._
+
 import Statistic._
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -47,6 +47,7 @@ object EstimateReplication extends App {
       val Point(tr, tg, tb, cm) = point
       val rng = new RandomAdaptor(new Well44497a(seed))
       val fitness = new Fitness {
+        println("OK")
         def model = Schelling3C(tr, tg, tb, cm)
       }
       fitness.value(rng)

@@ -27,7 +27,7 @@ object CalibrationCMAES extends App {
 
   val replications = 10
 
-  val sigma =0.2
+  val sigma = 0.5
 
   val nbIterMax = 99999
 
@@ -108,8 +108,8 @@ object CalibrationCMAES extends App {
   def computAggregatedFitness(g: Array[Double], rng: Random): Array[Double] = {
     val m = Schelling3C(g(0), g(1), g(2), g(3))
 
-    def maxUnsatisfied: Double = 0.8
-    def minSwitch: Double = 5.0
+    def targetUnsatisfied: Double = 0.2
+    def targetSwitch: Double = 5.0
 
     val f =
       new ResultShelling {
@@ -118,6 +118,7 @@ object CalibrationCMAES extends App {
 
     var avgSwitch = 0.0
     var avgUnsatisfied = 0.0
+
 
     for (i <- 0 to replications-1) {
       var results = f.value(rng)
@@ -128,7 +129,8 @@ object CalibrationCMAES extends App {
     avgSwitch = avgSwitch/replications
     avgUnsatisfied = avgUnsatisfied/replications
 
-    var fit = Math.pow((minSwitch - avgSwitch) / minSwitch,2) + Math.pow((avgUnsatisfied - maxUnsatisfied) / maxUnsatisfied , 2)
+    var fit = Math.pow((targetSwitch - avgSwitch) / targetSwitch,2) + Math.pow((avgUnsatisfied - targetUnsatisfied) / targetUnsatisfied , 2)
+    //var fit = Math.pow((avgUnsatisfied - targetUnsatisfied) / targetUnsatisfied , 2)
 
     var results = new Array[Double](3)
     results(0)  = fit
@@ -137,5 +139,6 @@ object CalibrationCMAES extends App {
 
     return results
   }
+
 
 }

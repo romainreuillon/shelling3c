@@ -17,9 +17,10 @@
 
 package generations
 
+import scala.util.Random
+
 object Statistic {
   import io._
-  import util.Random
 
   def variance(s: Seq[Double]) = {
     val avg = s.sum / s.size

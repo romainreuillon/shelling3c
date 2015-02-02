@@ -189,7 +189,7 @@ public class Model extends ModelParameters {
 	//     others cannot (eg worldXSize).
 	//    
 
-	public int getCurrentNumAgents () { return agentList.size(); }
+	public double getCurrentNumAgents () { return (double)agentList.size(); }
 /*	public void setNumAgents (int numAgents) {
 		this.numAgents = numAgents;
 		if (  schedule != null ) {
@@ -200,7 +200,7 @@ public class Model extends ModelParameters {
 
 	public int getCountRed () { return countRed(); }	
 	public int getCountGreen () { return countGreen(); }	
-	public int getCountBlue () { return countBlue(); }	
+	public double getCountBlue () { return countBlue(); }
 		
 	public int getNumAgents () { return numAgents; }
 	public void setNumAgents (int numAgents) {
@@ -221,6 +221,7 @@ public class Model extends ModelParameters {
 	}	
 	
 	public double getFractionRed () {    return fractionRed; }
+
 	public void setFractionRed (double f) {
 		fractionRed = f;
 		if ( modelType.equals( "GUIModel" ) )
@@ -231,7 +232,8 @@ public class Model extends ModelParameters {
 		}
 	}
 
-	public double getFractionGreen () {    return fractionGreen; }									// HS because, given a new blue agent type, the fraction of 
+	public double getFractionGreen () {    return fractionGreen; }
+									// HS because, given a new blue agent type, the fraction of
 	public void setFractionGreen (double f) {														// HS green agents is no longer just the inverse of the
 		fractionGreen = f;																			// HS number of red agents.
 		if ( modelType.equals( "GUIModel" ) )														// HS
@@ -635,7 +637,7 @@ public class Model extends ModelParameters {
 		return count;
 	}	
 	
-	public int countBlue(){
+	public double countBlue(){
 		
 		int count = 0;	
 
@@ -644,7 +646,8 @@ public class Model extends ModelParameters {
 			if ( a.getType() == Model.blueType ) 
 				count += 1 ;
 		}		
-		
+
+
 		return count;
 	}	
 	
@@ -959,7 +962,7 @@ public class Model extends ModelParameters {
 				averageNumNborsRed, averageFracNborsSameRed );
 		s += String.format(" %6.3f  %6.3f", 
 				averageNumNborsGreen, averageFracNborsSameGreen );
-		s += String.format(" %6d", countBlue());		
+//		s += String.format(" %6d", countBlue());
 //		s += String.format(" %d %d %d", countRed(), countGreen(), countBlue());
 
 		// write it to the xml and plain text report files

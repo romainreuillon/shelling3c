@@ -18,7 +18,7 @@
 package generations
 
 import fr.iscpif.mgo._
-import util.Random._
+
 import generations.Indicator.Fitness
 import org.apache.commons.math3.random.Well44497a
 
