@@ -57,7 +57,7 @@ object CalibrationNGSA2 extends App {
 
   val m =
     new SchellingPB with NSGAII with CounterTermination {
-      def steps = 100
+      def steps = 1000
       def mu = 100
       def lambda = 100
       override def cloneProbability: Double = 0.01
