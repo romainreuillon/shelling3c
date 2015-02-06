@@ -18,7 +18,7 @@
 package generations
 
 import cmaes.CMAEvolutionStrategy
-import org.apache.commons.math3.random.{Well44497a, RandomAdaptor}
+import org.apache.commons.math3.random.{ Well44497a, RandomAdaptor }
 import scala.util.Random
 import generations.Indicator.Fitness
 import Statistic._
@@ -45,7 +45,7 @@ object CalibrationCMAES extends App {
   cma.options.verbosity = -1;
   cma.setDimension(nbParams);
 
-  for( i <- 0 to nbParams-1){
+  for (i <- 0 to nbParams - 1) {
     initParam(i) = Math.random();
   }
 
@@ -54,23 +54,21 @@ object CalibrationCMAES extends App {
 
   var fitness = cma.init();
 
-
-
   var solutionFound = false
   var bestFit = 99999.0;
   var itr = 0
 
   implicit val rng: Random = new RandomAdaptor(new Well44497a(1))
 
-  while(solutionFound == false & itr < nbIterMax ){
+  while (solutionFound == false & itr < nbIterMax) {
 
     var pop = cma.samplePopulation();
     var currentParam = new Array[Double](nbParams)
 
-    for (i <- 0 to pop.length-1) {
+    for (i <- 0 to pop.length - 1) {
 
-      for( j <- 0 to nbParams-1){
-        currentParam(j) = min(j) +   (max(j) - min(j) )* (1- Math.cos(pop(i)(j) *Math.PI))/2.0;
+      for (j <- 0 to nbParams - 1) {
+        currentParam(j) = min(j) + (max(j) - min(j)) * (1 - Math.cos(pop(i)(j) * Math.PI)) / 2.0;
       }
 
       var results = computeReplication(currentParam, rng)
@@ -79,14 +77,14 @@ object CalibrationCMAES extends App {
 
       itr += 1
 
-      if(fitness(i) < bestFit ){
+      if (fitness(i) < bestFit) {
 
         bestFit = Math.min(bestFit, fitness(i))
         println("Iter " + itr)
         println("thresholdRed " + currentParam(0))
-        println("thresholdGreen " + currentParam(1) )
-        println("thresholdBlue " + currentParam(2) )
-        println("chanceMix " + currentParam(3) )
+        println("thresholdGreen " + currentParam(1))
+        println("thresholdBlue " + currentParam(2))
+        println("chanceMix " + currentParam(3))
         println(" ")
         println("fitSwitch " + results(1))
         println("fitUnsatisfied " + results(2))
@@ -95,7 +93,7 @@ object CalibrationCMAES extends App {
         println(" ")
       }
 
-      if(fitness(i) < fitnessTarget ){
+      if (fitness(i) < fitnessTarget) {
         solutionFound = true
       }
     }
@@ -103,24 +101,20 @@ object CalibrationCMAES extends App {
     cma.updateDistribution(fitness);
   }
 
-
-
   def computeReplication(g: Array[Double], rng: Random): Array[Double] = {
     val m = Schelling3C(g(0), g(1), g(2), g(3))
-
 
     val f =
       new Fitness {
         def model = m
       }
 
+    var ArrayFitness = new Array[Double](replications)
+    var ArraySwitch = new Array[Double](replications)
+    var ArrayUnsatisfied = new Array[Double](replications)
 
-    var ArrayFitness =new Array[Double](replications)
-    var ArraySwitch =new Array[Double](replications)
-    var ArrayUnsatisfied =new Array[Double](replications)
-
-    for (i <- 0 to replications-1) {
-      var (o1,o2) = f.value(rng)
+    for (i <- 0 to replications - 1) {
+      var (o1, o2) = f.value(rng)
 
       ArrayFitness(i) = o1 + o2
       ArraySwitch(i) = o1
@@ -131,14 +125,12 @@ object CalibrationCMAES extends App {
     var medianFitSwitch = median(ArraySwitch.toSeq)
     var medianFitUnsatisfied = median(ArrayUnsatisfied.toSeq)
 
-
     var results = new Array[Double](3)
-    results(0)  = medianFit
-    results(1)  = medianFitSwitch
-    results(2)  = medianFitUnsatisfied
+    results(0) = medianFit
+    results(1) = medianFitSwitch
+    results(2) = medianFitUnsatisfied
 
     return results
   }
-
 
 }
