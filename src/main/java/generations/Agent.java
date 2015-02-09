@@ -344,7 +344,7 @@ public class Agent implements Drawable {
 		} while (world.getObjectAt (newx, newy) != null && tries++ < maxTries );		
 		
 		if ( tries == maxTries ) {
-			System.err.printf( " *** Error ===> moveRandom couldn't find open spot! Agent not moved\n\n" );
+			//System.err.printf( " *** Error ===> moveRandom couldn't find open spot! Agent not moved\n\n" );
 			return 0;
 		}
 		else 

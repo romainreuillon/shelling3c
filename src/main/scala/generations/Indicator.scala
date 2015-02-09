@@ -29,8 +29,8 @@ object Indicator {
       def sizeX = grid.getSizeX
       def sizeY = grid.getSizeY
       def matrix =
-        for { x <- 0 until sizeX }
-          yield for { y <- 0 until sizeY } yield {
+        for {x <- 0 until sizeX}
+        yield for {y <- 0 until sizeY} yield {
           grid.getObjectAt(x, y) match {
             case null => -1
             case x => x.asInstanceOf[Agent].getType
@@ -84,6 +84,11 @@ object Indicator {
   def unsatisfied(model: Model) =
     model.getAgentList.map(_.asInstanceOf[Agent]).count(a => a.getFractionNborsSame <= a.getThreshold) / model.getAgentList.size
 
+
+  def fractionBlue(model: Model) =
+    model.countBlue() / model.getAgentList.size
+
+
   trait Fitness {
     def model: Random => Model
     def maxUnsatisfied: Double = 0.8
@@ -106,12 +111,42 @@ object Indicator {
       val diffSwitch = (minSwitch - normalisedSwitch) / minSwitch
       val diffUnsatisfied = (normalisedUnsatisfied - maxUnsatisfied) / maxUnsatisfied
       //(max(0.0, diffSwitch), max(0.0, diffUnsatisfied))
-      (abs(diffSwitch), abs(diffUnsatisfied))
+     (abs(diffSwitch), abs(diffUnsatisfied))
     }
   }
 
 
 
+  trait Fitness2 {
+    def model: Random => Model
 
+    def targetFractionBlue: Double = 0.50
+    def targetSwitch: Double = 1.5
+
+    def warming = 100
+    def range = 50
+
+    def value(rng: Random) = {
+      val m = model(rng)
+      (0 until warming).foreach(_ => m.step)
+      val (totalSwitch, totalFractionBlue) =
+        (0 until range).foldLeft((0.0, 0.0)) {
+          case ((totalSwitch, totalFractionBlue), _) =>
+            val v = (averageSwitchRate(m.getWorld.toTorus), fractionBlue(m))
+            m.step
+            (totalSwitch + v._1, totalFractionBlue + v._2)
+        }
+      val (normalisedSwitch, normalisedFractionBlue) = (totalSwitch.toDouble / range, totalFractionBlue.toDouble / range)
+      val diffSwitch = (normalisedSwitch - targetSwitch) / targetSwitch
+
+      val diffFractionBlue = (normalisedFractionBlue - targetFractionBlue) / targetFractionBlue
+
+
+
+      //(max(0.0, diffSwitch), max(0.0, diffUnsatisfied))
+      (abs(diffSwitch), abs(diffFractionBlue))
+      //(normalisedSwitch, normalisedFractionBlue)
+    }
+  }
 
 }

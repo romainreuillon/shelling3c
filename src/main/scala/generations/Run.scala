@@ -33,15 +33,16 @@ object Run extends App {
       _.setWorldYSize(10),
       _.setFractionRed(0.5),
       _.setMoveMethod(Model.randomMoveMethod),
-      _.setThresholdRed(0.7),
-      _.setThresholdGreen(0.7),
+      _.setThresholdRed(1),
+      _.setThresholdGreen(0),
+      _.setThresholdBlue(0),
       _.setRandomMoveProbability(0.0),
       _.setChanceDeath(0.01),
       _.setChanceBirth(0.01),
-      _.setChanceMix(1.0)
+      _.setChanceMix(0.15)
     )(_)
 
-  val fitness = new Fitness {
+  val fitness = new Fitness2 {
     override def model = m
   }
 

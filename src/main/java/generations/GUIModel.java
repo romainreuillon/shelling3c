@@ -27,6 +27,8 @@ import javax.swing.event.MouseInputAdapter;
 
 // import Graphics, necessary for code to override  the DisplaySurface class
 import java.awt.Graphics;
+import java.util.Random;
+
 
 import uchicago.src.sim.engine.*;
 import uchicago.src.sim.gui.*;
@@ -268,6 +270,8 @@ public class GUIModel extends Model {
 		// so the parameters object knows whether or not
 		// to do GUI related updates of panels,etc when a
 		// parameter is changed
+
+		model.setRandom(new Random());
 		model.setModelType("GUIModel");
 
         // Do this to set the Update Probes option to true in the

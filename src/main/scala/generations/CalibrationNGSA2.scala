@@ -19,7 +19,7 @@ package generations
 
 import fr.iscpif.mgo._
 
-import generations.Indicator.Fitness
+import generations.Indicator.{Fitness2, Fitness}
 import org.apache.commons.math3.random.Well44497a
 
 import scala.util.Random
@@ -28,12 +28,13 @@ import Statistic._
 
 object CalibrationNGSA2 extends App {
 
-  val replications = 250
+  val replications = 50
 
   trait SchellingPB extends GAProblem with MGFitness {
 
     def min = List.fill(genomeSize)(0.0)
     def max = List.fill(genomeSize)(1.0)
+
 
     def genomeSize = 4
 
@@ -43,7 +44,7 @@ object CalibrationNGSA2 extends App {
       val m = Schelling3C(g(0), g(1), g(2), g(3))
 
       val f =
-        new Fitness {
+        new Fitness2 {
           def model = m
         }
 
