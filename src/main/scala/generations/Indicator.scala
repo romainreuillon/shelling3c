@@ -114,9 +114,7 @@ object Indicator {
      (abs(diffSwitch), abs(diffUnsatisfied))
     }
   }
-
-
-
+  
   trait Fitness2 {
     def model: Random => Model
 
@@ -148,5 +146,4 @@ object Indicator {
       //(normalisedSwitch, normalisedFractionBlue)
     }
   }
-
 }
