@@ -18,6 +18,7 @@
 package generations
 
 import cmaes.CMAEvolutionStrategy
+import fr.iscpif.mgo._
 import org.apache.commons.math3.random.{ Well44497a, RandomAdaptor }
 import scala.util.Random
 import generations.Indicator.{Fitness2, Fitness}
@@ -35,7 +36,7 @@ object CalibrationCMAES extends App {
 
   val cma = new CMAEvolutionStrategy();
 
-  val nbParams = 4
+  val nbParams = 9
 
   def min = List.fill(nbParams)(0.0)
   def max = List.fill(nbParams)(1.0)
@@ -49,8 +50,10 @@ object CalibrationCMAES extends App {
     initParam(i) = Math.random();
   }
 
+
   cma.setInitialX(initParam);
   cma.setInitialStandardDeviation(sigma);
+
 
   var fitness = cma.init();
 
@@ -58,7 +61,7 @@ object CalibrationCMAES extends App {
   var bestFit = 99999.0;
   var itr = 0
 
-  implicit val rng: Random = new RandomAdaptor(new Well44497a(1))
+  implicit val rng = newRNG(42)
 
   while (solutionFound == false & itr < nbIterMax) {
 

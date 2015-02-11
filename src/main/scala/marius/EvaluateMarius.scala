@@ -33,6 +33,8 @@ object EvaluateMarius extends App {
     bonusMultiplier = 97.4206661151,
     fixedCost = 0.2257967847,
     ruralMultiplier = 0.018269691
+
+
   )
 
   // not used, marius model is deterministic
