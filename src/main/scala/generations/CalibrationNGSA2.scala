@@ -49,7 +49,20 @@ object CalibrationNGSA2 extends App {
         }
 
       val (o1, o2) = (0 until replications).map(_ => f.value(rng)).unzip
-      Seq(median(o1), median(o2))
+
+      //Les seuils rouge et verts doivent être en dessous du seuil bleu
+      // Il y a une pénalité si seuil rouge ou seuil vert supérieur à seuil bleu
+      var penalty = 0.0
+
+      if(g(0) > g(2)){
+        penalty += 10 + 100*(g(0) - g(2))
+      }
+
+      if(g(1) > g(2)){
+        penalty += 10 + 100*(g(1) - g(2))
+      }
+
+      Seq(median(o1) + penalty, median(o2) + penalty)
     }
 
     override def evaluate(p: P, rng: Random) = p
