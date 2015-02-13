@@ -18,7 +18,7 @@
 package marius
 
 import cmaes.CMAEvolutionStrategy
-import generations.Indicator.Fitness2
+import schelling.Indicator.Fitness2
 import org.apache.commons.math3.random.{RandomAdaptor, Well44497a}
 import fr.geocites.gugus.calibration._
 

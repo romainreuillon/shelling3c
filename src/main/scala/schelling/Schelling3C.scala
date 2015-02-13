@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package generations
+package schelling
 
 import net.sourceforge.openforecast.models.DoubleExponentialSmoothingModel
 

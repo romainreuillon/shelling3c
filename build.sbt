@@ -12,6 +12,8 @@ libraryDependencies += "fr.geocites" %% "marius" % simpuzzleVersion
 
 libraryDependencies += "fr.geocites" %% "guguscalibration" % simpuzzleVersion
 
+libraryDependencies += "fr.iscpif" %% "scalabc" % "0.5-SNAPSHOT"
+
 resolvers += Resolver.sonatypeRepo("snapshots")
 
 resolvers += "ISC-PIF" at "http://maven.iscpif.fr/public/"

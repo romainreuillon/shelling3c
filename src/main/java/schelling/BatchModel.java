@@ -1,26 +1,12 @@
-package generations;
+package schelling;
 
 /**
   BatchModel is a non-gui extension of base Model
 **/
 
-import java.io.*;
-import java.util.*;
-import java.util.Formatter;
-import java.awt.Color;
-import javax.swing.JFrame;
 // KeyListeners, MouseListeners etc.
-import java.awt.event.*;
 
 import uchicago.src.sim.engine.*;
-import uchicago.src.sim.gui.*;    // for the ColorMap's
-import uchicago.src.sim.space.*;
-import uchicago.src.sim.network.*;
-import uchicago.src.sim.util.SimUtilities;
-import uchicago.src.reflector.ListPropertyDescriptor;
-import uchicago.src.sim.analysis.*;
-import uchicago.src.collection.RangeMap;
-import uchicago.src.sim.util.*;
 
 public class BatchModel extends Model {
 

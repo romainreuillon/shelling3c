@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package generations
+package schelling
 
 import uchicago.src.sim.space.Object2DGrid
 import collection.JavaConversions._

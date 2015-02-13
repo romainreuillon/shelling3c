@@ -47,24 +47,19 @@
  * Wolfgang Hoschek
  * wolfgang.hoschek@cern.ch
  *$$*/
-package generations;
+package schelling;
 
-import java.io.*;
 import java.util.*;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Color;
-import java.util.Hashtable;
 
 import uchicago.src.sim.space.*;
 import uchicago.src.sim.gui.*;
 import uchicago.src.sim.util.SimUtilities;
 
-import uchicago.src.reflector.DescriptorContainer;
-import uchicago.src.reflector.BooleanPropertyDescriptor;
-
 // for ProbeUtilities
-import uchicago.src.sim.util.ProbeUtilities;
+
 
 public class Agent implements Drawable {
 

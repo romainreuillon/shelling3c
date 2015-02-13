@@ -15,11 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package generations
+package schelling
 
 import fr.iscpif.mgo._
 
-import generations.Indicator.{Fitness2, Fitness}
+import schelling.Indicator.{Fitness2, Fitness}
 import org.apache.commons.math3.random.Well44497a
 
 import scala.util.Random

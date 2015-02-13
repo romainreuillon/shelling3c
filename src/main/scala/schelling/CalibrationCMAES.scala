@@ -15,13 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package generations
+package schelling
 
 import cmaes.CMAEvolutionStrategy
 import fr.iscpif.mgo._
 import org.apache.commons.math3.random.{ Well44497a, RandomAdaptor }
 import scala.util.Random
-import generations.Indicator.{Fitness2, Fitness}
+import schelling.Indicator.{Fitness2, Fitness}
 import Statistic._
 
 object CalibrationCMAES extends App {

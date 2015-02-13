@@ -1,4 +1,4 @@
-package generations
+package schelling
 
 import java.io.{ Writer, PrintWriter }
 
