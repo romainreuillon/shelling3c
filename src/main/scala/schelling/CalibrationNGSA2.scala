@@ -19,9 +19,7 @@ package schelling
 
 import fr.iscpif.mgo._
 
-import schelling.Indicator.{Fitness2, Fitness}
-import org.apache.commons.math3.random.Well44497a
-
+import schelling.Indicator._
 import scala.util.Random
 import scalax.io.Resource
 import Statistic._
@@ -35,7 +33,6 @@ object CalibrationNGSA2 extends App {
     def min = List.fill(genomeSize)(0.0)
     def max = List.fill(genomeSize)(1.0)
 
-
     def genomeSize = 4
 
     type P = Seq[Double]
@@ -44,7 +41,7 @@ object CalibrationNGSA2 extends App {
       val m = Schelling3C(g(0), g(1), g(2), g(3))
 
       val f =
-        new Fitness2 {
+        new Fitness {
           def model = m
         }
 

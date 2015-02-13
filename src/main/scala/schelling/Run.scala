@@ -42,7 +42,7 @@ object Run extends App {
       _.setChanceMix(0.15)
     )(_)
 
-  val fitness = new Fitness2 {
+  val fitness = new Fitness {
     override def model = m
   }
 

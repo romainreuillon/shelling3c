@@ -22,15 +22,15 @@ import collection.JavaConversions._
 import math._
 import scala.util.Random
 
-object Indicator {
+object Indicator { indicator =>
 
   implicit class Object2DGridToArrayOfType(grid: Object2DGrid) {
     def toTorus = {
       def sizeX = grid.getSizeX
       def sizeY = grid.getSizeY
       def matrix =
-        for {x <- 0 until sizeX}
-        yield for {y <- 0 until sizeY} yield {
+        for { x <- 0 until sizeX }
+          yield for { y <- 0 until sizeY } yield {
           grid.getObjectAt(x, y) match {
             case null => -1
             case x => x.asInstanceOf[Agent].getType
@@ -84,69 +84,42 @@ object Indicator {
   def unsatisfied(model: Model) =
     model.getAgentList.map(_.asInstanceOf[Agent]).count(a => a.getFractionNborsSame <= a.getThreshold) / model.getAgentList.size
 
-
   def fractionBlue(model: Model) =
     model.countBlue() / model.getAgentList.size
 
+  def targetFractionBlue: Double = 0.50
+  def targetSwitch: Double = 1.5
 
-  trait Fitness {
+  trait Observable {
     def model: Random => Model
-    def maxUnsatisfied: Double = 0.8
-    def minSwitch: Double = 5.0
     def warming = 100
     def range = 50
 
-    def value(rng: Random) = {
+    def observables(rng: Random) = {
       val m = model(rng)
       (0 until warming).foreach(_ => m.step)
-      val (totalSwitch, totalUnsatisfied) =
-        (0 until range).foldLeft((0.0, 0.0)) {
-          case ((totalSwitch, totalUnsatisfied), _) =>
-            val v = (averageSwitchRate(m.getWorld.toTorus), unsatisfied(m))
-
-            m.step
-            (totalSwitch + v._1, totalUnsatisfied + v._2)
-        }
-      val (normalisedSwitch, normalisedUnsatisfied) = (totalSwitch.toDouble / range, totalUnsatisfied.toDouble / range)
-      val diffSwitch = (minSwitch - normalisedSwitch) / minSwitch
-      val diffUnsatisfied = (normalisedUnsatisfied - maxUnsatisfied) / maxUnsatisfied
-      //(max(0.0, diffSwitch), max(0.0, diffUnsatisfied))
-     (abs(diffSwitch), abs(diffUnsatisfied))
+      (0 until range).foldLeft((0.0, 0.0)) {
+        case ((totalSwitch, totalFractionBlue), _) =>
+          val v = (averageSwitchRate(m.getWorld.toTorus), fractionBlue(m))
+          m.step
+          (totalSwitch + v._1, totalFractionBlue + v._2)
+      }
     }
   }
 
-  trait Fitness2 {
-    def model: Random => Model
+  trait Fitness extends Observable {
 
-    def targetFractionBlue: Double = 0.50
-    def targetSwitch: Double = 1.5
-
-    def warming = 100
-    def range = 50
+    def targetFractionBlue: Double = indicator.targetFractionBlue
+    def targetSwitch: Double = indicator.targetSwitch
 
     def value(rng: Random) = {
-      val m = model(rng)
-      (0 until warming).foreach(_ => m.step)
-      val (totalSwitch, totalFractionBlue) =
-        (0 until range).foldLeft((0.0, 0.0)) {
-          case ((totalSwitch, totalFractionBlue), _) =>
-            val v = (averageSwitchRate(m.getWorld.toTorus), fractionBlue(m))
-            m.step
-            (totalSwitch + v._1, totalFractionBlue + v._2)
-        }
+      val (totalSwitch, totalFractionBlue) = observables(rng)
       val (normalisedSwitch, normalisedFractionBlue) = (totalSwitch.toDouble / range, totalFractionBlue.toDouble / range)
       val diffSwitch = (normalisedSwitch - targetSwitch) / targetSwitch
-
       val diffFractionBlue = (normalisedFractionBlue - targetFractionBlue) / targetFractionBlue
 
-
-
-      //(max(0.0, diffSwitch), max(0.0, diffUnsatisfied))
       (abs(diffSwitch), abs(diffFractionBlue))
-      //(normalisedSwitch, normalisedFractionBlue)
     }
   }
-
-
 
 }
