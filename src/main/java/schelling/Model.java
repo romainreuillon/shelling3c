@@ -46,41 +46,17 @@
  * Wolfgang Hoschek
  * wolfgang.hoschek@cern.ch
  *$$*/
-package generations;
+package schelling;
 
 // Which of these should we be using??
 //import cern.jet.random.Uniform;
-import uchicago.src.sim.util.Random;
 
-import uchicago.src.sim.engine.Schedule;
-import uchicago.src.sim.engine.SimModelImpl;
-import uchicago.src.sim.event.SliderListener;
-import uchicago.src.sim.gui.ColorMap;
-import uchicago.src.sim.gui.DisplaySurface;
-import uchicago.src.sim.gui.Object2DDisplay;
-import uchicago.src.sim.gui.Value2DDisplay;
 import uchicago.src.sim.space.*;
-import uchicago.src.sim.util.ProbeUtilities;
-import uchicago.src.sim.util.SimUtilities;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Formatter;  
-import java.io.*;
 import java.util.*;
-import java.awt.Color;
-import java.awt.FileDialog;
-import javax.swing.JFrame;
-
-import java.text.NumberFormat;
-import java.text.DecimalFormat;
-import java.text.DateFormat;
-import java.sql.Time;
 
 import java.lang.reflect.*;
-
-import java.util.TreeMap;
 
 /**
 

@@ -15,13 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package generations
+package schelling
 
 import cmaes.CMAEvolutionStrategy
 import fr.iscpif.mgo._
-import org.apache.commons.math3.random.{ Well44497a, RandomAdaptor }
 import scala.util.Random
-import generations.Indicator.{Fitness2, Fitness}
+import schelling.Indicator._
 import Statistic._
 
 object CalibrationCMAES extends App {
@@ -50,10 +49,8 @@ object CalibrationCMAES extends App {
     initParam(i) = Math.random();
   }
 
-
   cma.setInitialX(initParam);
   cma.setInitialStandardDeviation(sigma);
-
 
   var fitness = cma.init();
 
@@ -80,10 +77,10 @@ object CalibrationCMAES extends App {
 
       itr += 1
 
-      if(itr % 10 == 0){
+      if (itr % 10 == 0) {
         println("itr " + itr)
       }
-      if(fitness(i) < bestFit ){
+      if (fitness(i) < bestFit) {
         bestFit = Math.min(bestFit, fitness(i))
         println("Iter " + itr)
         println("thresholdRed " + currentParam(0))
@@ -110,29 +107,29 @@ object CalibrationCMAES extends App {
     val m = Schelling3C(g(0), g(1), g(2), g(3))
 
     val f =
-      new Fitness2 {
+      new Fitness {
         def model = m
       }
 
-    var ArrayFitness =new Array[Double](replications)
-    var ArrayFitSwitch =new Array[Double](replications)
-    var ArrayfitFractionBlue =new Array[Double](replications)
+    var ArrayFitness = new Array[Double](replications)
+    var ArrayFitSwitch = new Array[Double](replications)
+    var ArrayfitFractionBlue = new Array[Double](replications)
 
-    for (i <- 0 to replications-1) {
-      var (o1,o2) = f.value(rng)
-      ArrayFitness(i) = Math.pow(o1,2) + Math.pow(o2,2)
+    for (i <- 0 to replications - 1) {
+      var (o1, o2) = f.value(rng)
+      ArrayFitness(i) = Math.pow(o1, 2) + Math.pow(o2, 2)
       ArrayFitSwitch(i) = o1
       ArrayfitFractionBlue(i) = o2
     }
 
     var medianFit = median(ArrayFitness.toSeq)
     var medianFitSwitch = median(ArrayFitSwitch.toSeq)
-    var medianFitFractionBlue= median(ArrayfitFractionBlue.toSeq)
+    var medianFitFractionBlue = median(ArrayfitFractionBlue.toSeq)
 
     var results = new Array[Double](3)
-    results(0)  = medianFit
-    results(1)  = medianFitSwitch
-    results(2)  = medianFitFractionBlue
+    results(0) = medianFit
+    results(1) = medianFitSwitch
+    results(2) = medianFitFractionBlue
 
     return results
   }

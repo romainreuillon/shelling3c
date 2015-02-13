@@ -1,46 +1,22 @@
-package generations;
+package schelling;
 
 /**
  GUI extension of basic model
 **/
 
-import java.io.*;
-import java.util.*;
-import java.util.Formatter;  
 import java.awt.Color;
-import java.awt.FileDialog;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 // KeyListeners, MouseListeners etc.
-import java.awt.event.*;
 
 //MSM
-import javax.swing.event.MouseInputAdapter;
 
 
 // import Graphics, necessary for code to override  the DisplaySurface class
-import java.awt.Graphics;
 import java.util.Random;
 
 
 import uchicago.src.sim.engine.*;
 import uchicago.src.sim.gui.*;
-import uchicago.src.sim.space.*;
-import uchicago.src.sim.network.*;
-import uchicago.src.sim.util.SimUtilities;
-import uchicago.src.reflector.ListPropertyDescriptor;
 import uchicago.src.sim.analysis.*;
-import uchicago.src.collection.RangeMap;
-import uchicago.src.sim.event.SliderListener;
-import uchicago.src.sim.util.*;
-import uchicago.src.sim.analysis.plot.RepastPlot;
 
 // import graph3d.*;	//edited out because eclipse was complaining
 

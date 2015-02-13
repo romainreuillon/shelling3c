@@ -1,33 +1,13 @@
-package generations;
+package schelling;
 
 import java.io.*;
 import java.util.*;
-import java.util.Formatter;  // import this class lib
 import java.util.Scanner;
 import java.util.regex.*;  // for MatchResult
-import java.awt.Color;
-import java.awt.FileDialog;
-import javax.swing.JFrame;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import java.text.NumberFormat;
-import java.text.DecimalFormat;
-import java.text.DateFormat;
-import java.sql.Time;
 
 import java.lang.reflect.*;
 
 import uchicago.src.sim.engine.*;
-import uchicago.src.sim.gui.*;
-import uchicago.src.sim.space.*;
-import uchicago.src.sim.network.*;
-import uchicago.src.sim.util.SimUtilities;
-import uchicago.src.reflector.ListPropertyDescriptor;
-import uchicago.src.sim.util.Random;
-import uchicago.src.sim.analysis.*;
-import uchicago.src.collection.RangeMap;
-import uchicago.src.sim.event.SliderListener;
 
 import uchicago.src.sim.util.*;
 
@@ -35,9 +15,7 @@ import uchicago.src.sim.util.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
 import java.util.TreeMap;

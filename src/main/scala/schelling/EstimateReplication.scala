@@ -15,9 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package generations
+package schelling
 
-import generations.Indicator.Fitness
+import schelling.Indicator.Fitness
 import org.apache.commons.math3.random.{ RandomAdaptor, Well44497a }
 import scala.concurrent.duration.Duration
 import scala.concurrent.{ Await, Future }

@@ -19,12 +19,14 @@ package generations
 
 import fr.iscpif.mgo._
 
-import generations.Indicator.{Fitness2, Fitness}
+
 import org.apache.commons.math3.random.Well44497a
+import schelling.Indicator.Fitness
+import schelling.{Statistic, Schelling3C}
+import Statistic._
 
 import scala.util.Random
 import scalax.io.Resource
-import Statistic._
 
 object CalibrationNGSA2 extends App {
 
@@ -44,7 +46,7 @@ object CalibrationNGSA2 extends App {
       val m = Schelling3C(g(0), g(1), g(2), g(3))
 
       val f =
-        new Fitness2 {
+        new Fitness {
           def model = m
         }
 
