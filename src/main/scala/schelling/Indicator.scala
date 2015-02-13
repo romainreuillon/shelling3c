@@ -98,12 +98,13 @@ object Indicator { indicator =>
     def observables(rng: Random) = {
       val m = model(rng)
       (0 until warming).foreach(_ => m.step)
-      (0 until range).foldLeft((0.0, 0.0)) {
+      val (totalSwitch, totalFractionBlue) = (0 until range).foldLeft((0.0, 0.0)) {
         case ((totalSwitch, totalFractionBlue), _) =>
           val v = (averageSwitchRate(m.getWorld.toTorus), fractionBlue(m))
           m.step
           (totalSwitch + v._1, totalFractionBlue + v._2)
       }
+      (totalSwitch.toDouble / range, totalFractionBlue.toDouble / range)
     }
   }
 
@@ -113,8 +114,7 @@ object Indicator { indicator =>
     def targetSwitch: Double = indicator.targetSwitch
 
     def value(rng: Random) = {
-      val (totalSwitch, totalFractionBlue) = observables(rng)
-      val (normalisedSwitch, normalisedFractionBlue) = (totalSwitch.toDouble / range, totalFractionBlue.toDouble / range)
+      val (normalisedSwitch, normalisedFractionBlue) = observables(rng)
       val diffSwitch = (normalisedSwitch - targetSwitch) / targetSwitch
       val diffFractionBlue = (normalisedFractionBlue - targetFractionBlue) / targetFractionBlue
 

@@ -39,8 +39,11 @@ object ABC extends App {
       Uniform(0.0, 1.0)
     )
 
+    def clamp(d: Double) = if (d < 0.0) 0.0 else if (d > 1.0) 1.0 else d
+
     override def model(input: Seq[Double], seed: Long): Seq[Double] = {
-      val m = Schelling3C(input(0), input(1), input(2), input(3))
+      val i = input.map(clamp)
+      val m = Schelling3C(i(0), i(1), i(2), i(3))
       val o =
         new Observable {
           def model: (Random) => Model = m
