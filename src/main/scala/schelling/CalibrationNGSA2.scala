@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package generations
+package schelling
 
 import fr.iscpif.mgo._
 
@@ -24,6 +24,8 @@ import org.apache.commons.math3.random.Well44497a
 import schelling.Indicator.Fitness
 import schelling.{Statistic, Schelling3C}
 import Statistic._
+
+import schelling.Indicator._
 
 import scala.util.Random
 import scalax.io.Resource
@@ -36,7 +38,6 @@ object CalibrationNGSA2 extends App {
 
     def min = List.fill(genomeSize)(0.0)
     def max = List.fill(genomeSize)(1.0)
-
 
     def genomeSize = 4
 

@@ -122,7 +122,17 @@ object CalibrationCMAES extends App {
       ArrayfitFractionBlue(i) = o2
     }
 
-    var medianFit = median(ArrayFitness.toSeq)
+    var penalty = 0.0
+
+    if(g(0) > g(2)){
+      penalty += 10 + 100*(g(0) - g(2))
+    }
+
+    if(g(1) > g(2)){
+      penalty += 10 + 100*(g(1) - g(2))
+    }
+
+    var medianFit = median(ArrayFitness.toSeq) + penalty
     var medianFitSwitch = median(ArrayFitSwitch.toSeq)
     var medianFitFractionBlue = median(ArrayfitFractionBlue.toSeq)
 
